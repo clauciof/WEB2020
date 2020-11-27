@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import br.ufscar.dc.dsw.dao.MedicoDAO;
 import br.ufscar.dc.dsw.dao.PacienteDAO;
+
 import br.ufscar.dc.dsw.domain.Medico;
 import br.ufscar.dc.dsw.domain.Paciente;
 import br.ufscar.dc.dsw.domain.Usuario;
@@ -46,12 +48,25 @@ public class AdminController extends HttpServlet {
     	            switch (action) {
     	                case "/cadastromedicos":
     	                    apresentaFormCadastroMedicos(request, response);
+    	                    break;
     	                case "/cadastropacientes":
     	                    apresentaFormCadastroPacientes(request, response);
-    	                case "/insere_medico":
+    	                    break;
+    	                case "/inseremedico":
     	                    insereMedico(request, response);
+    	                    break;
     	                case "/insere_paciente":
     	                    inserePaciente(request, response);
+    	                    break;
+    	                case "/remocaomedico":
+    	                    removeMedico(request, response);
+    	                    break;
+    	                case "/edicaomedico":
+    	                	apresentaFormEdicaoMedicos(request, response);
+    	                    break;
+    	                case "/atualizamedico":
+    	                	atualizaMedico(request, response);
+    	                    break;
     	                default:
     	                    lista(request, response);
     	                    break;
@@ -99,18 +114,16 @@ public class AdminController extends HttpServlet {
     }
     
     private void insereMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        MedicoDAO medicodao;
-		medicodao = new MedicoDAO();
-		List<Medico> listaMedicos = medicodao.getAll();
-	    request.setAttribute("listaMedicos", listaMedicos);
-	    
-	    PacienteDAO pacientedao;
-		pacientedao = new PacienteDAO();
-		List<Paciente> listaPacientes = pacientedao.getAll();
-	    request.setAttribute("listaPacientes", listaPacientes);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/index.jsp");
-        dispatcher.forward(request, response);
+    	 String nome = request.getParameter("nome");
+    	 String login = request.getParameter("login");
+    	 String senha = request.getParameter("senha");
+    	 String especialidade = request.getParameter("especialidade");
+         
+    	 Medico medico = new Medico(nome, login, senha, especialidade);
+    	 MedicoDAO medicodao = new MedicoDAO();
+         medicodao.insert(medico);
+         
+         response.sendRedirect("lista");
     }
     
     private void inserePaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -128,4 +141,45 @@ public class AdminController extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/index.jsp");
         dispatcher.forward(request, response);
     }
+    
+    
+    private void removeMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String login = request.getParameter("login");
+    	
+    	Medico medico = new Medico(login);
+    	MedicoDAO medicodao;
+ 		medicodao = new MedicoDAO();
+ 		medicodao.delete(medico);
+ 		
+ 		response.sendRedirect("lista");
+    }
+    
+    private void apresentaFormEdicaoMedicos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	String login = request.getParameter("login");
+    	
+    	MedicoDAO medicodao;
+		medicodao = new MedicoDAO();
+		Medico medico = medicodao.getbyLogin(login);
+	    request.setAttribute("medico", medico);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/formulario_edicao_medicos.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    
+    private void atualizaMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String nome = request.getParameter("nome");
+	   	String login = request.getParameter("login");
+	   	String senha = request.getParameter("senha");
+	   	String especialidade = request.getParameter("especialidade");
+	    	
+    	Medico medico = new Medico(nome, login, senha, especialidade);
+    	MedicoDAO medicodao;
+ 		medicodao = new MedicoDAO();
+ 		medicodao.update(medico);
+ 		
+ 		response.sendRedirect("lista");
+    }
+    
+    
 }

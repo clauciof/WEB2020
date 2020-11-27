@@ -6,10 +6,16 @@ public class Medico {
 	private String login;
 	private String senha;
 	private String especialidade;
-
+	
+	public Medico( String login) {
+		
+		
+		this.login = login;
+		
+	}
 	
 	public Medico(String nome, String login, String senha, String especialidade) {
-		super();
+		
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;

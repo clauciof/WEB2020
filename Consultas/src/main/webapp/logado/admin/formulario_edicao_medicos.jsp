@@ -33,22 +33,20 @@
 		
 		<div class="container mt-3">
 		
-		<form method="post" action="inseremedico">
+		<form method="post" action="atualizamedico">
 	        	<div class="form-group">
 				    <label for="Medico">Medico</label>
-				    <input type="text" class="form-control" id="medico" aria-describedby="emailHelp" name="nome">
+				    <input type="text" class="form-control" id="medico" aria-describedby="emailHelp" name="nome" value="${medico.nome}">
+			  		<input type="hidden" class="form-control"  id="login" name="login" value="${medico.login}">
 			  </div>
-			  <div class="form-group">
-			    <label for="login">Login</label>
-			    <input type="text" class="form-control"  id="login" name="login">
-			  </div>
+			 
 			  <div class="form-group">
 			    <label for="senha">Senha</label>
-			    <input type="text" class="form-control"  id="senha" name="senha">
+			    <input type="text" class="form-control"  id="senha" name="senha" value="${medico.senha}">
 			  </div>
 			  <div class="form-group">
 			    <label for="especialidade">Especialidade</label>
-			    <input type="text" class="form-control"  id="especialidade" name="especialidade">
+			    <input type="text" class="form-control"  id="especialidade" name="especialidade" value="${medico.especialidade}">
 			  </div>
 			  <input class="btn btn-primary" type="submit" value="Salva" />
 	    </form>

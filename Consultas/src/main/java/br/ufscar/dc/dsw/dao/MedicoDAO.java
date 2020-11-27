@@ -9,23 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Medico;
-import br.ufscar.dc.dsw.domain.Usuario;
+
 
 public class MedicoDAO extends GenericDAO {
 
-    public void insert(Usuario usuario) {
+    public void insert(Medico medico) {
 
-        String sql = "INSERT INTO Medico (nome, login, senha, papel) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Medico (nome, login, senha, especialidade) VALUES (?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);;
 
             statement = conn.prepareStatement(sql);
-            statement.setString(1, usuario.getNome());
-            statement.setString(2, usuario.getLogin());
-            statement.setString(3, usuario.getSenha());
-            statement.setString(4, usuario.getPapel());
+            statement.setString(1, medico.getNome());
+            statement.setString(2, medico.getLogin());
+            statement.setString(3, medico.getSenha());
+            statement.setString(4, medico.getEspecialidade());
             statement.executeUpdate();
 
             statement.close();
@@ -65,14 +65,14 @@ public class MedicoDAO extends GenericDAO {
         return listaMedicos;
     }
 
-    public void delete(Usuario usuario) {
+    public void delete(Medico medico) {
         String sql = "DELETE FROM Medico where login = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, usuario.getLogin());
+            statement.setString(1, medico.getLogin());
             statement.executeUpdate();
 
             statement.close();
@@ -81,17 +81,17 @@ public class MedicoDAO extends GenericDAO {
         }
     }
 
-    public void update(Usuario usuario) {
-        String sql = "UPDATE Medico SET nome = ?, login = ?, senha = ?, papel = ? WHERE id = ?";
+    public void update(Medico medico) {
+        String sql = "UPDATE Medico SET nome = ?, senha = ?, especialidade = ? WHERE login = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, usuario.getNome());
-            statement.setString(2, usuario.getLogin());
-            statement.setString(3, usuario.getSenha());
-            statement.setString(4, usuario.getPapel());
+            statement.setString(1, medico.getNome());
+            statement.setString(2, medico.getSenha());
+            statement.setString(3, medico.getEspecialidade());
+            statement.setString(4, medico.getLogin());
             statement.executeUpdate();
 
             statement.close();
@@ -130,8 +130,8 @@ public class MedicoDAO extends GenericDAO {
         return usuario;
     }*/
     
-    public Usuario getbyLogin(String login) {
-        Usuario usuario = null;
+    public Medico getbyLogin(String login) {
+        Medico medico = null;
 
         String sql = "SELECT * from Medico WHERE login = ?";
 
@@ -145,9 +145,9 @@ public class MedicoDAO extends GenericDAO {
             	
                 String nome = resultSet.getString("nome");
                 String senha = resultSet.getString("senha");
-                String papel = resultSet.getString("papel");
+                String especialidade = resultSet.getString("especialidade");
 
-                usuario = new Usuario(nome, login, senha, papel);
+                medico = new Medico(nome, login, senha, especialidade);
             }
 
             resultSet.close();
@@ -156,7 +156,7 @@ public class MedicoDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return usuario;
+        return medico;
     }
     
 }
