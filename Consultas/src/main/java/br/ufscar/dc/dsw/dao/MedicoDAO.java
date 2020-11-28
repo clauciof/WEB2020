@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufscar.dc.dsw.domain.Consulta;
 import br.ufscar.dc.dsw.domain.Medico;
 
 
@@ -177,6 +178,41 @@ public class MedicoDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
         return medico;
+    }
+    
+    public List<Consulta> getConsultas(String nomemedico_) {
+
+        List<Consulta> listaConsultas = new ArrayList<>();
+
+        String sql = "SELECT * from Consulta where nomemedico = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, nomemedico_);
+            ResultSet resultSet = statement.executeQuery();
+            
+            
+
+            
+            while (resultSet.next()) {
+                
+                String nomepaciente = resultSet.getString("nomepaciente");
+                String loginpaciente = resultSet.getString("loginpaciente");
+                String nomemedico = resultSet.getString("nomemedico");
+                String data = resultSet.getString("datahora");
+                Consulta consulta = new Consulta(nomepaciente, loginpaciente, nomemedico, data);
+                listaConsultas.add(consulta);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaConsultas;
     }
     
 }

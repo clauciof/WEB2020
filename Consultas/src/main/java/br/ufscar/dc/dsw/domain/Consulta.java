@@ -25,6 +25,8 @@ public class Consulta{
 		this.nomemedico = nomem;
 		this.datahora = data;
 	}
+	
+	
 
 	
 	public String getNomePaciente() {

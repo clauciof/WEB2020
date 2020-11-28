@@ -52,7 +52,7 @@ public class IndexController extends HttpServlet {
 							response.sendRedirect("paciente/");
 						};
 						if(usuario.getPapel().equals("MEDICO")){
-							response.sendRedirect("paciente/");
+							response.sendRedirect("medico/");
 						};
 						return;
 					} else {
