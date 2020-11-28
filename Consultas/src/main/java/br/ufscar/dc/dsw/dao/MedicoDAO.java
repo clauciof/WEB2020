@@ -33,6 +33,26 @@ public class MedicoDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        
+        
+        sql = "INSERT INTO Usuario (nome, login, senha, papel) VALUES (?, ?, ?, ?)";
+        
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);;
+
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, medico.getNome());
+            statement.setString(2, medico.getLogin());
+            statement.setString(3, medico.getSenha());
+            statement.setString(4, "MEDICO");
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Medico> getAll() {

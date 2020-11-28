@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import br.ufscar.dc.dsw.domain.Consulta;
 import br.ufscar.dc.dsw.domain.Paciente;
 
 
@@ -24,6 +26,48 @@ public class PacienteDAO extends GenericDAO {
             statement.setString(1, paciente.getNome());
             statement.setString(2, paciente.getLogin());
             statement.setString(3, paciente.getSenha());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        
+        sql = "INSERT INTO Usuario (nome, login, senha, papel) VALUES (?, ?, ?, ?)";
+        
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);;
+
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, paciente.getNome());
+            statement.setString(2, paciente.getLogin());
+            statement.setString(3, paciente.getSenha());
+            statement.setString(4, "PACIENTE");
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    
+    public void insertConsulta(Consulta consulta) {
+
+        String sql = "INSERT INTO Consulta (nomepaciente, loginpaciente, nomemedico, datahora) VALUES (?, ?, ?, ?)";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);;
+
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, consulta.getNomePaciente());
+            statement.setString(2, consulta.getLoginPaciente());
+            statement.setString(3, consulta.getNomeMedico());
+            statement.setString(4, consulta.getData());
             statement.executeUpdate();
 
             statement.close();
@@ -60,6 +104,42 @@ public class PacienteDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
         return listaPacientes;
+    }
+    
+    public List<Consulta> getConsultas(String login) {
+
+        List<Consulta> listaConsultas = new ArrayList<>();
+
+        String sql = "SELECT * from Consulta where loginpaciente = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            
+            
+
+            
+            while (resultSet.next()) {
+                
+                String nomepaciente = resultSet.getString("nomepaciente");
+                String loginpaciente = resultSet.getString("loginpaciente");
+                String nomemedico = resultSet.getString("nomemedico");
+                String loginmedico= resultSet.getString("loginmedico");
+                String data = resultSet.getString("datahora");
+                Consulta consulta = new Consulta(nomepaciente, loginpaciente, nomemedico, loginmedico, data);
+                listaConsultas.add(consulta);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaConsultas;
     }
 
     public void delete(Paciente paciente) {
