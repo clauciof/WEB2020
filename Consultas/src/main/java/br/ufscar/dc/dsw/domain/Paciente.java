@@ -5,7 +5,14 @@ public class Paciente {
 	private String nome;
 	private String login;
 	private String senha;
-
+	
+	
+	public Paciente(String login) {
+		
+		this.login = login;
+		
+		
+	}
 	
 	public Paciente(String nome, String login, String senha) {
 		super();

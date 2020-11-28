@@ -25,7 +25,7 @@
     	<div class="container mt-3">
         
 	        <div align="center">
-			<h1>Cadastro de Medicos</h1>
+			<h1>Edição de Medico</h1>
 				<h2>
 					<a href="${pageContext.request.contextPath}/index.jsp">Menu Principal</a> &nbsp;&nbsp;&nbsp; 
 				</h2>		

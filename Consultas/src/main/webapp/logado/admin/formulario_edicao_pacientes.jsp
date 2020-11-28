@@ -25,7 +25,7 @@
     	<div class="container mt-3">
         
 	        <div align="center">
-			<h1>Cadastro de Pacientes</h1>
+			<h1>Edição de Paciente</h1>
 				<h2>
 					<a href="${pageContext.request.contextPath}/index.jsp">Menu Principal</a> &nbsp;&nbsp;&nbsp; 
 				</h2>		
@@ -33,18 +33,16 @@
 		
 		<div class="container mt-3">
 		
-		<form method="post" action="inserepaciente">
+		<form method="post" action="atualizapaciente">
 	        	<div class="form-group">
 				    <label for="Paciente">Paciente</label>
-				    <input type="text" class="form-control" id="paciente" aria-describedby="emailHelp" name="nome">
+				    <input type="text" class="form-control" id="paciente" aria-describedby="emailHelp" name="nome" value="${paciente.nome}">
+			  		<input type="hidden" class="form-control"  id="login" name="login" value="${paciente.login}">
 			  </div>
-			  <div class="form-group">
-			    <label for="login">Login</label>
-			    <input type="text" class="form-control"  id="login" name="login">
-			  </div>
+			 
 			  <div class="form-group">
 			    <label for="senha">Senha</label>
-			    <input type="text" class="form-control"  id="senha" name="senha">
+			    <input type="text" class="form-control"  id="senha" name="senha" value="${paciente.senha}">
 			  </div>
 			  <input class="btn btn-primary" type="submit" value="Salva" />
 	    </form>

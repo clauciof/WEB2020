@@ -55,17 +55,26 @@ public class AdminController extends HttpServlet {
     	                case "/inseremedico":
     	                    insereMedico(request, response);
     	                    break;
-    	                case "/insere_paciente":
+    	                case "/inserepaciente":
     	                    inserePaciente(request, response);
     	                    break;
     	                case "/remocaomedico":
     	                    removeMedico(request, response);
+    	                    break;
+    	                case "/remocaopaciente":
+    	                    removePaciente(request, response);
     	                    break;
     	                case "/edicaomedico":
     	                	apresentaFormEdicaoMedicos(request, response);
     	                    break;
     	                case "/atualizamedico":
     	                	atualizaMedico(request, response);
+    	                    break;
+    	                case "/edicaopaciente":
+    	                	apresentaFormEdicaoPaciente(request, response);
+    	                    break;
+    	                case "/atualizapaciente":
+    	                	atualizaPaciente(request, response);
     	                    break;
     	                default:
     	                    lista(request, response);
@@ -129,17 +138,15 @@ public class AdminController extends HttpServlet {
     private void inserePaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         
-        MedicoDAO medicodao;
-		medicodao = new MedicoDAO();
-		List<Medico> listaMedicos = medicodao.getAll();
-	    request.setAttribute("listaMedicos", listaMedicos);
-	    
-	    PacienteDAO pacientedao;
-		pacientedao = new PacienteDAO();
-		List<Paciente> listaPacientes = pacientedao.getAll();
-	    request.setAttribute("listaPacientes", listaPacientes);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/index.jsp");
-        dispatcher.forward(request, response);
+        String nome = request.getParameter("nome");
+	   	String login = request.getParameter("login");
+	   	String senha = request.getParameter("senha");
+	        
+	   	Paciente paciente = new Paciente(nome, login, senha);
+	   	PacienteDAO pacientedao = new PacienteDAO();
+        pacientedao.insert(paciente);
+        
+        response.sendRedirect("lista");
     }
     
     
@@ -150,6 +157,17 @@ public class AdminController extends HttpServlet {
     	MedicoDAO medicodao;
  		medicodao = new MedicoDAO();
  		medicodao.delete(medico);
+ 		
+ 		response.sendRedirect("lista");
+    }
+    
+    private void removePaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String login = request.getParameter("login");
+    	
+    	Paciente paciente = new Paciente(login);
+    	PacienteDAO pacientedao;
+ 		pacientedao = new PacienteDAO();
+ 		pacientedao.delete(paciente);
  		
  		response.sendRedirect("lista");
     }
@@ -180,6 +198,34 @@ public class AdminController extends HttpServlet {
  		
  		response.sendRedirect("lista");
     }
+    
+    private void apresentaFormEdicaoPaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	String login = request.getParameter("login");
+    	
+    	PacienteDAO pacientedao;
+		pacientedao = new PacienteDAO();
+		Paciente paciente = pacientedao.getbyLogin(login);
+	    request.setAttribute("paciente", paciente);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/admin/formulario_edicao_pacientes.jsp");
+        dispatcher.forward(request, response);
+    }
+
+
+	private void atualizaPaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		String nome = request.getParameter("nome");
+	   	String login = request.getParameter("login");
+	   	String senha = request.getParameter("senha");
+	    
+	   	
+	   	Paciente paciente = new Paciente(nome, login, senha);
+	   	PacienteDAO pacientedao = new PacienteDAO();
+ 		pacientedao.update(paciente);
+ 		
+ 		response.sendRedirect("lista");
+ 		
+	}
     
     
 }

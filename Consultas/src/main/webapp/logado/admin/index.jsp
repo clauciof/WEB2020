@@ -80,9 +80,9 @@
 								<td>${paciente.nome}</td>
 								<td>${paciente.login}</td>
 								<td>${paciente.senha}</td>
-								<td><a class="btn btn-success" role="button" href="${pageContext.request.contextPath}/admin/edicao?id=${paciente.login}">Edição</a>
+								<td><a class="btn btn-success" role="button" href="${pageContext.request.contextPath}/admin/edicaopaciente?login=${paciente.login}">Edição</a>
 									&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-danger" role="button"
-									href="${pageContext.request.contextPath}/admin/remocao?id=${paciente.login}"
+									href="${pageContext.request.contextPath}/admin/remocaopaciente?login=${paciente.login}"
 									onclick="return confirm('Tem certeza de que deseja excluir este item?');">
 										Remoção </a></td>
 							</tr>
