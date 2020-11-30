@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+import br.ufscar.dc.dsw.dao.MedicoDAO;
 import br.ufscar.dc.dsw.dao.PacienteDAO;
 import br.ufscar.dc.dsw.domain.Consulta;
 
@@ -81,20 +82,27 @@ public class PacienteController extends HttpServlet {
     }
     
     private void apresentaFormCadastroConsulta(HttpServletRequest request, HttpServletResponse response, Usuario usuario) throws ServletException, IOException {
-    	request.setAttribute("paciente", usuario);
+    	MedicoDAO medicodao = new MedicoDAO();
     	
+    	
+    	request.setAttribute("paciente", usuario);
+    	request.setAttribute("medicos", medicodao.getAll());
     	RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/paciente/formulario_consultas.jsp");
         dispatcher.forward(request, response);
     }
     
     private void insereConsulta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	Consulta consulta;
+    	
     	String nomemedico = request.getParameter("nomemedico");
 	   	String nomepaciente = request.getParameter("nomepaciente");
 	   	String loginpaciente = request.getParameter("loginpaciente");
 	   	String cpfpaciente = request.getParameter("cpfpaciente");
 	   	String data = request.getParameter("data");
+	   
 	        
-	    Consulta consulta = new Consulta(nomepaciente,loginpaciente, cpfpaciente, nomemedico,  data);
+	    consulta = new Consulta(nomepaciente,loginpaciente, cpfpaciente, nomemedico,  data);
 	    PacienteDAO pacientedao = new PacienteDAO();
         pacientedao.insertConsulta(consulta);
         

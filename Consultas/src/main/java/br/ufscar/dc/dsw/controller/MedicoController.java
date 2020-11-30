@@ -60,7 +60,7 @@ public class MedicoController extends HttpServlet {
     
     private void lista(HttpServletRequest request, HttpServletResponse response, Usuario usuario) throws ServletException, IOException {
     	MedicoDAO medicodao = new MedicoDAO();
-		List<Consulta> listaConsultas = medicodao.getConsultas(usuario.getNome());
+		List<Consulta> listaConsultas = medicodao.getConsultas(usuario.getLogin());
 	    request.setAttribute("listaConsultas", listaConsultas);
 	    
 	    request.setAttribute("login", usuario.getNome());

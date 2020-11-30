@@ -12,7 +12,7 @@
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	    	
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Livraria Virtual</title>
+<title>Sistema Consultas</title>
 </head>
 <body>
  <nav class="navbar navbar-light bg-light justify-content-between">
@@ -36,7 +36,13 @@
 		<form method="post" action="insereconsulta">
 	        	<div class="form-group">
 				    <label for="Medico">Medico</label>
-				    <input type="text" class="form-control" id="nomemedico" aria-describedby="emailHelp" name="nomemedico">
+				    <select id="loginmedico" name="nomemedico">
+		   				<c:forEach items="${medicos}" var="medico">
+		   					<option value="${medico.login}">${medico.login}</option>
+		   						
+		   				</c:forEach>
+   					</select>
+				    
 				    <input type="hidden" class="form-control" id="nomepaciente" aria-describedby="emailHelp" name="nomepaciente" value="${paciente.nome}">
 				    <input type="hidden" class="form-control" id="loginpaciente" aria-describedby="emailHelp" name="loginpaciente" value="${paciente.login}">
 				 </div>

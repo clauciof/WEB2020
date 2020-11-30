@@ -40,7 +40,7 @@
 				  <thead class="thead-dark">
 				    <tr>
 				      <th>Paciente</th>
-					  <th>Login</th>
+					  <th>CPF</th>
 					  <th>Medico</th>
 					  <th>Data e Hora</th>
 				    </tr>

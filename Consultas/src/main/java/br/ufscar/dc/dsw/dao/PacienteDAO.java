@@ -60,7 +60,8 @@ public class PacienteDAO extends GenericDAO {
     
     
     public void insertConsulta(Consulta consulta) {
-
+    	
+    	
         String sql = "INSERT INTO Consulta (nomepaciente, loginpaciente, cpfpaciente, nomemedico, datahora) VALUES (?, ?, ?, ?, ?)";
 
         try {
