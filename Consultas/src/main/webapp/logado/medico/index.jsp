@@ -17,7 +17,7 @@
     <body>
     
 	   <nav class="navbar navbar-light bg-light justify-content-between">
-		  <a class="navbar-brand">Pagina do Paciene</a>
+		  <a class="navbar-brand">Pagina do Medico</a>
 		  <form class="form-inline">
 		    <a class="btn btn-primary" role="button" href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
 		  </form>
@@ -28,8 +28,7 @@
 	        <div align="center">
 			<h1>Página do Medico</h1>
 				<h2>
-					<a href="${pageContext.request.contextPath}/index.jsp">Menu Principal</a> &nbsp;&nbsp;&nbsp; >
-						
+					<a href="${pageContext.request.contextPath}/index.jsp">Menu Principal</a> &nbsp;&nbsp;&nbsp; 						
 						
 				</h2>
 			</div>
@@ -40,7 +39,7 @@
 				  <thead class="thead-dark">
 				    <tr>
 				      <th>Paciente</th>
-					  <th>Login</th>
+					  <th>CPF</th>
 					  <th>Medico</th>
 					  <th>Data e Hora</th>
 				    </tr>
@@ -49,7 +48,8 @@
 				   <c:forEach var="consulta" items="${requestScope.listaConsultas}">
 						<tr>
 							<td>${consulta.nomePaciente}</td>
-							<td>${consulta.loginPaciente}</td>
+							<td>${consulta.cpf}</td>
+							<td>${login}</td>
 							<td>${consulta.data}</td>
 						</tr>
 					</c:forEach>

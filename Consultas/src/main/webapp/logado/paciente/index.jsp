@@ -49,7 +49,7 @@
 				   <c:forEach var="consulta" items="${requestScope.listaConsultas}">
 						<tr>
 							<td>${consulta.nomePaciente}</td>
-							<td>${consulta.loginPaciente}</td>
+							<td>${consulta.cpf}</td>
 							<td>${consulta.nomeMedico}</td>
 							<td>${consulta.data}</td>
 						</tr>

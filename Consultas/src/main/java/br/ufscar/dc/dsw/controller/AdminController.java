@@ -127,8 +127,9 @@ public class AdminController extends HttpServlet {
     	 String login = request.getParameter("login");
     	 String senha = request.getParameter("senha");
     	 String especialidade = request.getParameter("especialidade");
+    	 String crm = request.getParameter("crm");
          
-    	 Medico medico = new Medico(nome, login, senha, especialidade);
+    	 Medico medico = new Medico(nome, login, senha, especialidade, crm);
     	 MedicoDAO medicodao = new MedicoDAO();
          medicodao.insert(medico);
          
@@ -137,12 +138,23 @@ public class AdminController extends HttpServlet {
     
     private void inserePaciente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        
+        String sexo;
         String nome = request.getParameter("nome");
 	   	String login = request.getParameter("login");
 	   	String senha = request.getParameter("senha");
+	   	String cpf = request.getParameter("cpf");
+	   	String telefone = request.getParameter("telefone");
+	   	String feminino = request.getParameter("feminino");
+	   	String masculino = request.getParameter("masculino");
+	   	String nascimento = request.getParameter("nascimento");
+	   	
+	   	if (feminino == "" || feminino == null ) {
+	   		sexo = masculino;
+	   	}else {
+	   		sexo = feminino;
+	   	}
 	        
-	   	Paciente paciente = new Paciente(nome, login, senha);
+	   	Paciente paciente = new Paciente(nome, login, senha, cpf, telefone, sexo, nascimento);
 	   	PacienteDAO pacientedao = new PacienteDAO();
         pacientedao.insert(paciente);
         
@@ -190,8 +202,9 @@ public class AdminController extends HttpServlet {
 	   	String login = request.getParameter("login");
 	   	String senha = request.getParameter("senha");
 	   	String especialidade = request.getParameter("especialidade");
+	   	String crm = request.getParameter("crm");
 	    	
-    	Medico medico = new Medico(nome, login, senha, especialidade);
+    	Medico medico = new Medico(nome, login, senha, especialidade, crm);
     	MedicoDAO medicodao;
  		medicodao = new MedicoDAO();
  		medicodao.update(medico);
@@ -217,9 +230,10 @@ public class AdminController extends HttpServlet {
 		String nome = request.getParameter("nome");
 	   	String login = request.getParameter("login");
 	   	String senha = request.getParameter("senha");
+	   	String telefone = request.getParameter("telefone");
 	    
 	   	
-	   	Paciente paciente = new Paciente(nome, login, senha);
+	   	Paciente paciente = new Paciente(nome, login, senha, telefone);
 	   	PacienteDAO pacientedao = new PacienteDAO();
  		pacientedao.update(paciente);
  		

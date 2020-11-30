@@ -44,6 +44,10 @@
 			    <label for="senha">Senha</label>
 			    <input type="text" class="form-control"  id="senha" name="senha" value="${paciente.senha}">
 			  </div>
+			  <div class="form-group">
+			    <label for="Telefone">Telefone</label>
+			    <input type="text" class="form-control"  id="telefone" name="telefone" value="${paciente.telefone}">
+			  </div>
 			  <input class="btn btn-primary" type="submit" value="Salva" />
 	    </form>
 			

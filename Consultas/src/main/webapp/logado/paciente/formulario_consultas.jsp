@@ -41,8 +41,12 @@
 				    <input type="hidden" class="form-control" id="loginpaciente" aria-describedby="emailHelp" name="loginpaciente" value="${paciente.login}">
 				 </div>
 			  <div class="form-group">
+				  <label for="cpf">CPF</label>
+				  <input type="text" class="form-control" id="cpfpaciente" aria-describedby="emailHelp" name="cpfpaciente">
+			  </div>
+			  <div class="form-group">
 			    <label for="data">Data/Hora</label>
-			    <input type="text" class="form-control"  id="especialidade" name="data">
+			    <input type="text" class="form-control"  id="data" name="data">
 			  </div>
 			  <input class="btn btn-primary" type="submit" value="Salva" />
 	    </form>

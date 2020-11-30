@@ -66,7 +66,7 @@ public class MedicoController extends HttpServlet {
 	    request.setAttribute("login", usuario.getNome());
 	    
 	   
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/paciente/index.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/medico/index.jsp");
         dispatcher.forward(request, response);
     }
 }

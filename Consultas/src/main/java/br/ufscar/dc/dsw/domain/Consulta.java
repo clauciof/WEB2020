@@ -4,24 +4,35 @@ public class Consulta{
 
 	private String nomepaciente;
 	private String loginpaciente;
+	private String cpfpaciente;
 	private String nomemedico;
 	private String loginmedico;
 	private String datahora;
 	
 	
-	public Consulta( String nomep, String loginp,  String nomem, String loginm, String data) {
+	public Consulta( String nomep, String loginp, String cpfp,  String nomem, String data) {
 		
 		this.nomepaciente = nomep;
 		this.loginpaciente = loginp;
+		this.cpfpaciente = cpfp;
+		this.nomemedico = nomem;
+		this.datahora = data;
+	}
+	
+	public Consulta( String nomep, String loginp, String cpfp,  String nomem, String loginm, String data) {
+		
+		this.nomepaciente = nomep;
+		this.loginpaciente = loginp;
+		this.cpfpaciente = cpfp;
 		this.nomemedico = nomem;
 		this.loginmedico = loginm;
 		this.datahora = data;
 	}
 	
-	public Consulta( String nomep, String loginp,  String nomem, String data) {
+	public Consulta( String nomep, String cpfp,  String nomem, String data) {
 		
 		this.nomepaciente = nomep;
-		this.loginpaciente = loginp;
+		this.cpfpaciente = cpfp;
 		this.nomemedico = nomem;
 		this.datahora = data;
 	}
@@ -37,12 +48,12 @@ public class Consulta{
 		this.nomepaciente = nome;
 	}
 
-	public String getLoginPaciente() {
-		return this.loginpaciente;
+	public String getCpf() {
+		return this.cpfpaciente;
 	}
 
-	public void setLoginPaciente(String login) {
-		this.loginpaciente = login;
+	public void setCpf(String cpf) {
+		this.cpfpaciente = cpf;
 	}
 
 
@@ -68,5 +79,13 @@ public class Consulta{
 
 	public void setData(String data) {
 		this.datahora = data;
+	}
+
+	public String getLoginpaciente() {
+		return loginpaciente;
+	}
+
+	public void setLoginpaciente(String loginpaciente) {
+		this.loginpaciente = loginpaciente;
 	}
 }

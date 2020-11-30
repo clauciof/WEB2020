@@ -50,6 +50,10 @@
 			    <label for="especialidade">Especialidade</label>
 			    <input type="text" class="form-control"  id="especialidade" name="especialidade">
 			  </div>
+			   <div class="form-group">
+			    <label for="crm">CRM</label>
+			    <input type="text" class="form-control"  id="crm" name="crm">
+			  </div>
 			  <input class="btn btn-primary" type="submit" value="Salva" />
 	    </form>
 			

@@ -16,7 +16,7 @@ public class MedicoDAO extends GenericDAO {
 
     public void insert(Medico medico) {
 
-        String sql = "INSERT INTO Medico (nome, login, senha, especialidade) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Medico (nome, login, senha, especialidade, crm) VALUES (?, ?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
@@ -27,6 +27,7 @@ public class MedicoDAO extends GenericDAO {
             statement.setString(2, medico.getLogin());
             statement.setString(3, medico.getSenha());
             statement.setString(4, medico.getEspecialidade());
+            statement.setString(5, medico.getCrm());
             statement.executeUpdate();
 
             statement.close();
@@ -73,7 +74,8 @@ public class MedicoDAO extends GenericDAO {
                 String login = resultSet.getString("login");
                 String senha = resultSet.getString("senha");
                 String especialidade = resultSet.getString("especialidade");
-                Medico medico = new Medico(nome, login, senha, especialidade);
+                String crm = resultSet.getString("crm");
+                Medico medico = new Medico(nome, login, senha, especialidade, crm);
                 listaMedicos.add(medico);
             }
 
@@ -100,6 +102,20 @@ public class MedicoDAO extends GenericDAO {
             conn.close();
         } catch (SQLException e) {
         }
+        
+        sql = "DELETE FROM Usuario where login = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, medico.getLogin());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+        }
     }
 
     public void update(Medico medico) {
@@ -113,6 +129,23 @@ public class MedicoDAO extends GenericDAO {
             statement.setString(2, medico.getSenha());
             statement.setString(3, medico.getEspecialidade());
             statement.setString(4, medico.getLogin());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        
+        sql = "UPDATE Usuario SET nome = ?, senha = ? WHERE login = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, medico.getNome());
+            statement.setString(2, medico.getSenha());
+            statement.setString(3, medico.getLogin());
             statement.executeUpdate();
 
             statement.close();
@@ -167,8 +200,9 @@ public class MedicoDAO extends GenericDAO {
                 String nome = resultSet.getString("nome");
                 String senha = resultSet.getString("senha");
                 String especialidade = resultSet.getString("especialidade");
+                String crm = resultSet.getString("crm");
 
-                medico = new Medico(nome, login, senha, especialidade);
+                medico = new Medico(nome, login, senha, especialidade, crm);
             }
 
             resultSet.close();
@@ -199,10 +233,10 @@ public class MedicoDAO extends GenericDAO {
             while (resultSet.next()) {
                 
                 String nomepaciente = resultSet.getString("nomepaciente");
-                String loginpaciente = resultSet.getString("loginpaciente");
+                String cpfpaciente = resultSet.getString("cpfpaciente");
                 String nomemedico = resultSet.getString("nomemedico");
                 String data = resultSet.getString("datahora");
-                Consulta consulta = new Consulta(nomepaciente, loginpaciente, nomemedico, data);
+                Consulta consulta = new Consulta(nomepaciente, cpfpaciente, nomemedico, data);
                 listaConsultas.add(consulta);
             }
 

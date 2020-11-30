@@ -46,6 +46,26 @@
 			    <label for="senha">Senha</label>
 			    <input type="text" class="form-control"  id="senha" name="senha">
 			  </div>
+			  <div class="form-group">
+			    <label for="cpf">CPF</label>
+			    <input type="text" class="form-control"  id="cpf" name="cpf">
+			  </div>
+			  <div class="form-group">
+			    <label for="Telefone">Telefone</label>
+			    <input type="text" class="form-control"  id="telefone" name="telefone">
+			  </div>
+			  <div class="form-check form-check-inline">
+			      <input class="form-check-input" type="checkbox" id="Feminino" value="Feminino" name="feminino">
+				  <label class="form-check-label" for="inlineCheckbox1">Feminino</label>
+			  </div>
+			  <div class="form-check form-check-inline">
+				  <input class="form-check-input" type="checkbox" id="Masculino" value="Masculino" name="masculino">
+				  <label class="form-check-label" for="inlineCheckbox2">Masculino</label>
+			  </div>
+			  <div class="form-group">
+			    <label for="nascimento">Nascimento</label>
+			    <input type="text" class="form-control"  id="nascimento" name="nascimento">
+			  </div>
 			  <input class="btn btn-primary" type="submit" value="Salva" />
 	    </form>
 			

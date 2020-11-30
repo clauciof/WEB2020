@@ -16,7 +16,7 @@ public class PacienteDAO extends GenericDAO {
 
     public void insert(Paciente paciente) {
 
-        String sql = "INSERT INTO Paciente (nome, login, senha) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Paciente (nome, login, senha, cpf, telefone, sexo, nascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
@@ -26,6 +26,10 @@ public class PacienteDAO extends GenericDAO {
             statement.setString(1, paciente.getNome());
             statement.setString(2, paciente.getLogin());
             statement.setString(3, paciente.getSenha());
+            statement.setString(4, paciente.getCpf());
+            statement.setString(5, paciente.getTelefone());
+            statement.setString(6, paciente.getSexo());
+            statement.setString(7, paciente.getNascimento());
             statement.executeUpdate();
 
             statement.close();
@@ -57,7 +61,7 @@ public class PacienteDAO extends GenericDAO {
     
     public void insertConsulta(Consulta consulta) {
 
-        String sql = "INSERT INTO Consulta (nomepaciente, loginpaciente, nomemedico, datahora) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Consulta (nomepaciente, loginpaciente, cpfpaciente, nomemedico, datahora) VALUES (?, ?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
@@ -65,9 +69,10 @@ public class PacienteDAO extends GenericDAO {
 
             statement = conn.prepareStatement(sql);
             statement.setString(1, consulta.getNomePaciente());
-            statement.setString(2, consulta.getLoginPaciente());
-            statement.setString(3, consulta.getNomeMedico());
-            statement.setString(4, consulta.getData());
+            statement.setString(2, consulta.getLoginpaciente());
+            statement.setString(3, consulta.getCpf());
+            statement.setString(4, consulta.getNomeMedico());
+            statement.setString(5, consulta.getData());
             statement.executeUpdate();
 
             statement.close();
@@ -93,7 +98,11 @@ public class PacienteDAO extends GenericDAO {
                 String nome = resultSet.getString("nome");
                 String login = resultSet.getString("login");
                 String senha = resultSet.getString("senha");
-                Paciente paciente = new Paciente(nome, login, senha);
+                String cpf = resultSet.getString("cpf");
+                String telefone = resultSet.getString("telefone");
+                String sexo = resultSet.getString("sexo");
+                String nascimento = resultSet.getString("nascimento");
+                Paciente paciente = new Paciente(nome, login, senha, cpf, telefone, sexo, nascimento);
                 listaPacientes.add(paciente);
             }
 
@@ -125,11 +134,12 @@ public class PacienteDAO extends GenericDAO {
             while (resultSet.next()) {
                 
                 String nomepaciente = resultSet.getString("nomepaciente");
-                String loginpaciente = resultSet.getString("loginpaciente");
+                String loginpaciente = resultSet.getString("cpfpaciente");
+                String cpfpaciente = resultSet.getString("cpfpaciente");
                 String nomemedico = resultSet.getString("nomemedico");
                 String loginmedico= resultSet.getString("loginmedico");
                 String data = resultSet.getString("datahora");
-                Consulta consulta = new Consulta(nomepaciente, loginpaciente, nomemedico, loginmedico, data);
+                Consulta consulta = new Consulta(nomepaciente, loginpaciente, cpfpaciente, nomemedico, loginmedico, data);
                 listaConsultas.add(consulta);
             }
 
@@ -156,10 +166,24 @@ public class PacienteDAO extends GenericDAO {
             conn.close();
         } catch (SQLException e) {
         }
+        
+       sql = "DELETE FROM Usuario where login = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, paciente.getLogin());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+        }
     }
 
     public void update(Paciente paciente) {
-        String sql = "UPDATE Paciente SET nome = ?, login = ?, senha = ? WHERE login = ?";
+        String sql = "UPDATE Paciente SET nome = ?, login = ?, senha = ?, telefone = ? WHERE login = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -168,7 +192,25 @@ public class PacienteDAO extends GenericDAO {
             statement.setString(1, paciente.getNome());
             statement.setString(2, paciente.getLogin());
             statement.setString(3, paciente.getSenha());
-            statement.setString(4, paciente.getLogin());
+            statement.setString(4, paciente.getTelefone());
+            statement.setString(5, paciente.getLogin());
+            statement.executeUpdate();
+
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        
+        sql = "UPDATE Usuario SET nome = ?, senha = ? WHERE login = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, paciente.getNome());
+            statement.setString(2, paciente.getSenha());
+            statement.setString(3, paciente.getLogin());
             statement.executeUpdate();
 
             statement.close();
@@ -223,7 +265,11 @@ public class PacienteDAO extends GenericDAO {
                 String nome = resultSet.getString("nome");
                 String senha = resultSet.getString("senha");
                 String login = resultSet.getString("login");
-                paciente = new Paciente(nome, login, senha);
+                String cpf = resultSet.getString("cpf");
+                String telefone = resultSet.getString("telefone");
+                String sexo = resultSet.getString("sexo");
+                String nascimento = resultSet.getString("nascimento");
+                paciente = new Paciente(nome, login, senha, cpf, telefone, sexo, nascimento);
             }
 
             resultSet.close();

@@ -49,6 +49,7 @@
 			    <tr>
 			      <th>Nome</th>
 				  <th>Especialidade</th>
+				  <th>CRM</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -56,6 +57,7 @@
 					<tr>
 						<td>${medico.nome}</td>
 						<td>${medico.especialidade}</td>
+						<td>${medico.crm}</td>
 					</tr>
 				</c:forEach>
 			  </tbody>

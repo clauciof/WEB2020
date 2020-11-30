@@ -44,6 +44,7 @@
 					  <th>Login</th>
 					  <th>Senha</th>
 					  <th>Especialidade</th>
+					  <th>CRM</th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -53,6 +54,7 @@
 							<td>${medico.login}</td>
 							<td>${medico.senha}</td>
 							<td>${medico.especialidade}</td>
+							<td>${medico.crm}</td>
 							<td><a class="btn btn-success" role="button" href="${pageContext.request.contextPath}/admin/edicaomedico?login=${medico.login}">Edição</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-danger" role="button"
 								href="${pageContext.request.contextPath}/admin/remocaomedico?login=${medico.login}"
@@ -72,6 +74,10 @@
 					      <th>Nome</th>
 					      <th>Login</th>
 					      <th>Senha</th>
+					      <th>CPF</th>
+					      <th>Sexo</th>
+					      <th>Telefone</th>
+					      <th>Data Nascimento</th>
 					    </tr>
 					  </thead>
 					  <tbody>
@@ -80,6 +86,10 @@
 								<td>${paciente.nome}</td>
 								<td>${paciente.login}</td>
 								<td>${paciente.senha}</td>
+								<td>${paciente.cpf}</td>
+								<td>${paciente.sexo}</td>
+								<td>${paciente.telefone}</td>
+								<td>${paciente.nascimento}</td>
 								<td><a class="btn btn-success" role="button" href="${pageContext.request.contextPath}/admin/edicaopaciente?login=${paciente.login}">Edição</a>
 									&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-danger" role="button"
 									href="${pageContext.request.contextPath}/admin/remocaopaciente?login=${paciente.login}"

@@ -6,6 +6,7 @@ public class Medico {
 	private String login;
 	private String senha;
 	private String especialidade;
+	private String crm;
 	
 	public Medico( String login) {
 		
@@ -14,12 +15,13 @@ public class Medico {
 		
 	}
 	
-	public Medico(String nome, String login, String senha, String especialidade) {
+	public Medico(String nome, String login, String senha, String especialidade, String crm) {
 		
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
 		this.especialidade = especialidade;
+		this.crm = crm;
 	}
 
 	
@@ -54,4 +56,14 @@ public class Medico {
 	public void setEspecialidade(String especialidade) {
 		this.especialidade = especialidade;
 	}
+	
+	public String getCrm() {
+		return crm;
+	}
+
+	public void setCrm(String crm) {
+		this.crm = crm;
+	}
+	
+	
 }

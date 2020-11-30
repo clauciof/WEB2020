@@ -91,9 +91,10 @@ public class PacienteController extends HttpServlet {
     	String nomemedico = request.getParameter("nomemedico");
 	   	String nomepaciente = request.getParameter("nomepaciente");
 	   	String loginpaciente = request.getParameter("loginpaciente");
+	   	String cpfpaciente = request.getParameter("cpfpaciente");
 	   	String data = request.getParameter("data");
 	        
-	    Consulta consulta = new Consulta(nomepaciente, loginpaciente, nomemedico,  data);
+	    Consulta consulta = new Consulta(nomepaciente,loginpaciente, cpfpaciente, nomemedico,  data);
 	    PacienteDAO pacientedao = new PacienteDAO();
         pacientedao.insertConsulta(consulta);
         
