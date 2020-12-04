@@ -11,7 +11,7 @@ Java, Tomcat, Maven, MySQL
 #### Instalação do Banco
 Antes de fazer deploy e executar o projeto deve-se criar o Banco e suas tabelas. Dentro do diretório do projeto executar no terminal o script create.sql
 ```
-source sd/MySQL/create.sql
+source db/MySQL/create.sql
 ```
 O BANCO UTILIZA SENHA 'PASSWORD', altere a classe GenericDAO se necessário.
 
