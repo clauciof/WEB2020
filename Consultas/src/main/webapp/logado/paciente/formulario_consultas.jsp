@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
+<fmt:bundle basename="messages">
 <head>
 		<!-- Required meta tags -->
 	    <meta charset="utf-8">
@@ -12,22 +14,22 @@
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	    	
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Sistema Consultas</title>
+<title><fmt:message key="appointmentSys"/></title>
 </head>
 <body>
  <nav class="navbar navbar-light bg-light justify-content-between">
-		  <a class="navbar-brand">Pagina do Paciente</a>
+		  <a class="navbar-brand"><fmt:message key="pagPac"/></a>
 		  <form class="form-inline">
-		    <a class="btn btn-primary" role="button" href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
+		    <a class="btn btn-primary" role="button" href="${pageContext.request.contextPath}/logout.jsp"><fmt:message key="exit"/></a>
 		  </form>
 		</nav>
     	
     	<div class="container mt-3">
         
 	        <div align="center">
-			<h1>Cadastro de Consultas</h1>
+			<h1><fmt:message key="cadastroConsultas"/></h1>
 				<h2>
-					<a href="${pageContext.request.contextPath}/index.jsp">Menu Principal</a> &nbsp;&nbsp;&nbsp; 
+					<a href="${pageContext.request.contextPath}/index.jsp"><fmt:message key="mainMenu"/></a> &nbsp;&nbsp;&nbsp; 
 				</h2>		
 		</div>
 		
@@ -35,7 +37,7 @@
 		
 		<form method="post" action="insereconsulta">
 	        	<div class="form-group">
-				    <label for="Medico">Medico</label>
+				    <label for="Medico"><fmt:message key="doc"/></label>
 				    <select id="loginmedico" name="nomemedico">
 		   				<c:forEach items="${medicos}" var="medico">
 		   					<option value="${medico.login}">${medico.login}</option>
@@ -51,10 +53,10 @@
 				  <input type="text" class="form-control" id="cpfpaciente" aria-describedby="emailHelp" name="cpfpaciente">
 			  </div>
 			  <div class="form-group">
-			    <label for="data">Data/Hora</label>
+			    <label for="data"><fmt:message key="dataHora"/></label>
 			    <input type="text" class="form-control"  id="data" name="data">
 			  </div>
-			  <input class="btn btn-primary" type="submit" value="Salva" />
+			  <input class="btn btn-primary" type="submit" value=<fmt:message key="save"/> />
 	    </form>
 			
 		</div>
@@ -66,4 +68,5 @@
 	        
 	
 </body>
+</fmt:bundle>
 </html>

@@ -1,8 +1,10 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
+<fmt:bundle basename="messages">
     <head>
     	<!-- Required meta tags -->
 	    <meta charset="utf-8">
@@ -12,37 +14,37 @@
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	    	
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Menu do Sistema</title>
+        <title><fmt:message key="menuSys"/></title>
     </head>
     <body>
     
 	   <nav class="navbar navbar-light bg-light justify-content-between">
-		  <a class="navbar-brand">Pagina do Paciene</a>
+		  <a class="navbar-brand"><fmt:message key="pagPac"/></a>
 		  <form class="form-inline">
-		    <a class="btn btn-primary" role="button" href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
+		    <a class="btn btn-primary" role="button" href="${pageContext.request.contextPath}/logout.jsp"><fmt:message key="exit"/></a>
 		  </form>
 		</nav>
     	
     	<div class="container mt-3">
         
 	        <div align="center">
-			<h1>Página do Paciente</h1>
+			<h1><fmt:message key="pagPac"/></h1>
 				<h2>
-					<a href="${pageContext.request.contextPath}/index.jsp">Menu Principal</a> &nbsp;&nbsp;&nbsp; <a
-						href="${pageContext.request.contextPath}/paciente/cadastroconsulta">Adicione Nova Consulta</a>&nbsp;&nbsp;&nbsp;
+					<a href="${pageContext.request.contextPath}/index.jsp"><fmt:message key="mainMenu"/></a> &nbsp;&nbsp;&nbsp; <a
+						href="${pageContext.request.contextPath}/paciente/cadastroconsulta"><fmt:message key="addCons"/></a>&nbsp;&nbsp;&nbsp;
 						
 				</h2>
 			</div>
 	
 		<div class="container mt-5" >
-			<h4>Suas Consultas ${login} </h4>
+			<h4><fmt:message key="suasConsultas"/> ${login} </h4>
 	        	<table class="table">
 				  <thead class="thead-dark">
 				    <tr>
-				      <th>Paciente</th>
+				      <th><fmt:message key="paciente"/></th>
 					  <th>CPF</th>
-					  <th>Medico</th>
-					  <th>Data e Hora</th>
+					  <th><fmt:message key="doc"/></th>
+					  <th><fmt:message key="dataHora"/></th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -69,4 +71,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 	        
     </body>
+</fmt:bundle>
 </html>
