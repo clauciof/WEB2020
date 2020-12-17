@@ -17,9 +17,7 @@ create table Medico(
 	senha varchar(64) not null,
 	crm varchar(20) not null,
 	primary key (login),
-	
 	FOREIGN KEY (login) REFERENCES Usuario(login)
-	
 	
 	
 	);
@@ -34,9 +32,7 @@ create table Paciente(
 	sexo varchar(15) not null,
 	nascimento varchar(10) not null,
 	primary key (login),
-	
 	FOREIGN KEY (login) REFERENCES Usuario(login)
-	
 	
 	
 	);
@@ -49,9 +45,8 @@ create table Consulta(
 	nomemedico varchar(256) not null,
 	loginmedico varchar(20),
  	datahora varchar(20) not null,
-	PRIMARY KEY (loginpaciente, datahora)
-	
-	
+	PRIMARY KEY (loginpaciente, datahora),
+	FOREIGN KEY (loginmedico) REFERENCES Medico(login)	
 	
 	);
 
